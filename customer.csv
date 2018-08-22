@@ -1,0 +1,4 @@
+,customer_id,customer_name,customer_contact,customer_address,customer_type,customer_email,customer_register_date
+0,1,bunn,9930,aaaa,a,a,0000-00-00 00:00:00
+1,3,Max,9029006525,test address,individual,abc@xyz.com,2018-08-22 11:04:37
+2,4,mike,2353201,kalyan,Individual,mike@test.com,2018-08-22 19:13:47
