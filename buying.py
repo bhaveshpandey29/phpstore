@@ -29,8 +29,10 @@ def buyProduct(customer_id,product_id,buying_quantity,buying_total_bill):
         else:
             if(flag == 0):
                 print("bought successfully")
+                return(True)
             else:
                 print("Already purchased")
+                return(False)
         finally:
             db.close()
 
@@ -38,20 +40,25 @@ def buyProduct(customer_id,product_id,buying_quantity,buying_total_bill):
 
 def getTotalBuyDetail(customer_id):
     try:
-        flag = 1
+        flag = 0
         db,cursor = connection()
         sql = f"select * from buying where customer_id like'{customer_id}'"
         cursor.execute(sql)
         res = cursor.fetchall()
+        if(len(res)>0):
+            flag = 1
     except Exception as e:
         print("Something went wrong!!")
         raise e
     else:
-        print(list(res))
+        if(flag == 1):
+            print(list(res))
+        else:
+            print(f"No record found for customer id {customer_id}")
     finally:
         db.close()
 
-#getTotalBuyDetail(1)
+#getTotalBuyDetail(3)
 
 def getTotalBill(product_id,product_quantity):
     try:

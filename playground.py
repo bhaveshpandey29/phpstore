@@ -21,19 +21,26 @@ def checkAdminCredentials():
 
 def customerArena(functionality_choice):
     if(functionality_choice == 1):
-        print(customer_name)
-        print(customer_contact_no)
         product_name = str(input(f"Please enter the product name: "))
         prod_quantity = int(input("Please enter the quantity: ")) 
         customer_contact = str(input("Awesome! Please enter your registered mobile number to continue: "))
         customer_id = getCustomerId(customer_contact)
         prod_id = getProductId(product_name)
         total_bill = getTotalBill(prod_id,prod_quantity)
-        print(f"Wohoo! you have sucessfully purchased the '{product_name}' and your Total Bill is: '{total_bill}'")
-        return(buyProduct(customer_id,prod_id,prod_quantity,total_bill))
-    else:
-        print("This functionality is under construction!")
+        if ((buyProduct(customer_id,prod_id,prod_quantity,total_bill))):
+            print(f"Wohoo! you have sucessfully purchased the '{product_name}' and your Total Bill is: '{total_bill}'\n\n\n")
+                
+    elif functionality_choice ==2:
+        #ordered product.
+        customer_contact = str(input("Please enter your registered mobile number to see your order/s detail/s: "))
+        customer_id = getCustomerId(customer_contact)
+        getTotalBuyDetail(customer_id) 
 
+    elif functionality_choice == 3:
+        run() 
+    else:
+        print("Please enter correct choice.")
+            
 def adminArena(functionality_choice):
     if(functionality_choice == 1):
         #add product
@@ -56,8 +63,13 @@ def adminArena(functionality_choice):
         generateCustomerCSV()
     
     elif(functionality_choice == 4):
-        pass
+        #total transaction
+        customer_id = int(input("Please enter the customer ID whose transaction details you want to see: "))
+        getTotalBuyDetail(customer_id)
     
+    elif(functionality_choice == 5):
+        run()
+
     else:
         print("Please enter the correct choice.")
 
@@ -85,7 +97,7 @@ def run():
         user_choice = int(input("1.Customer\n2.Admin\n3.Exit\n"))
         if(user_choice == 1):
             if checkCustomerCredentials():
-                functionality_choice = int(input("1.Buy Product\n2.Order Product\n"))
+                functionality_choice = int(input("1.Buy Product\n2.Ordered Product\n3.Logout\n"))
                 customerArena(functionality_choice)
             else:
                 print("Wrong credentials, try again!!")
@@ -94,7 +106,7 @@ def run():
                     registerCustomerPanel()
         elif (user_choice == 2):
             if checkAdminCredentials():
-                functionality_choice = int(input("1.Add Product\n2.Add Customer\n3.Generate Report\n4.Total "))
+                functionality_choice = int(input("1.Add Product\n2.Add Customer\n3.Generate Report\n4.Total Transaction\n5.Logout\n"))
                 adminArena(functionality_choice)
             else:
                 print("Wrong creds try again!!")
