@@ -1,4 +1,4 @@
 # phpstore
-This is Milk delivery system build with Python
+This is Milk delivery system build in Python
 
 Start the project from playground.py
